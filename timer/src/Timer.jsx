@@ -49,8 +49,8 @@ const Timer = () => {
     if (time > 0 && hour == 0 && minute == 0 && second == 0) {
       const newTime = time / 60;
       setHour(Math.floor(newTime));
-      setMinute(time - Math.floor(newTime) * 60 - 1);
-      setSecond(59);
+      setMinute(time % 60); 
+      setSecond(0);    
     }
     setFlag(true);
   };
@@ -74,7 +74,7 @@ const Timer = () => {
       <input
         type="number"
         className="form-control w-25 mx-auto"
-        placeholder="Enter time in seconds"
+        placeholder="Enter time in minutes"
         onChange={(e) => {
           setTime(e.target.value);
         }}
