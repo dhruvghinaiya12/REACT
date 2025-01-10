@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TodoItem from "./todoItem";
+import TodoItem from "./TodoItem";
 import { Slide, toast, ToastContainer } from "react-toastify";
 import "bootstrap/dist/css/bootstrap.css";
 
