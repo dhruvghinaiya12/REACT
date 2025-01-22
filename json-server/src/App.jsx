@@ -1,10 +1,12 @@
 import React from 'react'
-import Data from './Data'
+import Getdata from './components/Getdata'
+import Data from './components/Data'
 
 const App = () => {
   return (
     <div>
       <Data/>
+      <Getdata/>
     </div>
   )
 }
