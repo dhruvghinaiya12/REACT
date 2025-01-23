@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { ToastContainer, Bounce, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { Slide, toast, ToastContainer } from "react-toastify";
 import "bootstrap/dist/css/bootstrap.min.css"; 
 
 const Data = () => {
@@ -28,16 +27,11 @@ const Data = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     postdata();
-    toast.success("User Added Successfully", {
+    toast.success("Task added successfully!", {
       position: "top-center",
       autoClose: 1000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
       theme: "dark",
-      transition: Bounce,
+      transition: Slide,
     });
     setData({ username: "", email: "", age: "" });
   };
