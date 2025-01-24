@@ -1,6 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import "bootstrap/dist/css/bootstrap.css";
+import { ValidateSchema } from "./Schema";
 
 const Registration = () => {
   const formik = useFormik({
@@ -12,11 +13,18 @@ const Registration = () => {
       email: "",
       password: "",
     },
+    
     onSubmit: (values) => {
       console.log(values);      
-      formik.resetForm();       
+      formik.resetForm({ values: formik.initialValues });       
     },
+    
+    validationSchema:ValidateSchema,
+
   });
+
+  console.log(formik.errors);
+  
 
   return (
     <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
