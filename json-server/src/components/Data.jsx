@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Slide, toast, ToastContainer } from "react-toastify";
 import "bootstrap/dist/css/bootstrap.min.css"; 
+import ApiLink from "../config/Api";
 
-const Data = () => {
+const Data = ({InitialData={},onclose}) => {
+  
   const [data, setData] = useState({
-    username: "",
-    email: "",
-    age: "",
-  });
-
+    username:InitialData?.username ? InitialData.username: "",
+    email:InitialData?.email ? InitialData.email:"",
+    age:InitialData?.age ? InitialData.age: "",
+    });
   const handleInput = (e) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
@@ -17,22 +17,37 @@ const Data = () => {
 
   const postdata = async () => {
     try {
-      let res = await axios.post("http://localhost:5000/api/v1/user", data);
-      console.log(res.data);
+      if(InitialData._id){
+        await ApiLink.patch(`/api/v1/user/${InitialData._id}`, data);
+        toast.success("Task updated successfully!", {
+          position: "top-center",
+          autoClose: 1000,
+          theme: "dark",
+          transition: Slide,
+        });
+        setTimeout(() => {
+          onclose();
+        }, 1500);
+      }
+      else{
+        let res = await ApiLink.post("/api/v1/user", data);
+        console.log(res.data);
+        toast.success("Task added successfully!", {
+          position: "top-center",
+          autoClose: 1000,
+          theme: "dark",
+          transition: Slide,
+        });
+      }
+    
     } catch (error) {
-      console.log(error);
-    }
+      console.error("Error in postdata:", error);    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     postdata();
-    toast.success("Task added successfully!", {
-      position: "top-center",
-      autoClose: 1000,
-      theme: "dark",
-      transition: Slide,
-    });
+   
     setData({ username: "", email: "", age: "" });
   };
 
@@ -53,7 +68,7 @@ const Data = () => {
               placeholder="Enter your name"
               value={data.username}
               onChange={handleInput}
-              required
+              
             />
           </div>
           <div className="mb-3">
@@ -68,7 +83,7 @@ const Data = () => {
               placeholder="Enter your email"
               value={data.email}
               onChange={handleInput}
-              required
+              
             />
           </div>
           <div className="mb-3">
@@ -83,12 +98,10 @@ const Data = () => {
               placeholder="Enter your age"
               value={data.age}
               onChange={handleInput}
-              required
+              
             />
           </div>
-          <button type="submit" className="btn btn-primary w-100">
-            Submit
-          </button>
+          <input type="submit" className="btn btn-primary w-100"  value={InitialData._id? "update" : "submit"}/>      
         </form>
         <ToastContainer />
       </div>
