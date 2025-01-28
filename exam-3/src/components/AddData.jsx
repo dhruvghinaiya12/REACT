@@ -21,7 +21,7 @@ const AddData = () => {
           const res = await ApiLink.post("/StudentData", userData);
           console.log(res.data);
         
-          setUserData({ title: "", description: "", category: "" }); 
+          setUserData({ username: "", email: "", number: "", password: "",}); 
         } catch (error) {
           console.error("Error creating post:", error);
         }
