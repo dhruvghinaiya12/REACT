@@ -1,7 +1,8 @@
 import React from "react";
 import { useFormik } from "formik";
 import "bootstrap/dist/css/bootstrap.css";
-import { ValidateSchema } from "./Schema";
+import { ValidateSchema } from "../Schema";
+import ApiLink from "../config/API";
 
 const Registration = () => {
   const formik = useFormik({
@@ -15,7 +16,8 @@ const Registration = () => {
     },
     
     onSubmit: (values) => {
-      console.log(values);      
+      console.log(values);     
+      postdata(values); 
       formik.resetForm({ values: formik.initialValues });       
     },
     
@@ -23,6 +25,19 @@ const Registration = () => {
 
   });
 
+
+  const postdata=async(data)=>{
+    try {
+      
+      let res=await ApiLink.post("/user",data)
+      console.log(res.data)
+   
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+  
 
   return (
     <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>

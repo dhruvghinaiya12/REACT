@@ -1,10 +1,12 @@
 import React from 'react'
-import Registration from './Registration'
+import Registration from './components/Registration'
+import FetchUsers from './components/FetchUsers'
 
 const App = () => {
   return (
     <div>
       <Registration/>
+      <FetchUsers/>
     </div>
   )
 }
