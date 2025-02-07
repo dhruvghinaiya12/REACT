@@ -1,6 +1,7 @@
 const express=require("express");
 const cors=require("cors");
 const db = require("./config/db");
+const AppRoute=require("./routes/index")
 
 require("dotenv").config();
 
@@ -10,12 +11,11 @@ const app=express()
 app.use(cors({
     origin: "http://localhost:5173", 
 }));
-app.use(express.json())
-app.get("/",(req, res) =>{
-    res.send("Hello World!")
-})
 
-// app.use("/api/v1",AppRoutes)
+app.use(express.json())
+
+
+app.use("/api/v1",AppRoute)
 
 app.listen(port,()=>{
     console.log(`Server is running on port ${port}`)

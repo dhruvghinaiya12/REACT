@@ -1,23 +1,9 @@
-const express=require("express");
-const cors=require("cors");
-const db = require("../config/db");
+const {Router}=require("express")
+const UserRoutes=require("./UserRoute");
 
-require("dotenv").config();
+const Routes=Router();
 
-const port=process.env.PORT || 5050
-const app=express()
+Routes.use("/user",UserRoutes)
 
-app.use(cors({
-    origin: "http://localhost:5173", 
-}));
-app.use(express.json())
-app.get("/",(req, res) =>{
-    res.send("Hello World!")
-})
 
-// app.use("/api/v1",AppRoutes)
-
-app.listen(port,()=>{
-    console.log(`Server is running on port ${port}`)
-   db();
-})
+module.exports=Routes;

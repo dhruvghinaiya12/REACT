@@ -12,11 +12,8 @@ const Navbar = () => {
         </div>
 
         <div className="hidden md:flex space-x-6">
-          <Link to="/dashboard" className="text-white hover:text-gray-400 transition-colors">
+          <Link to="/" className="text-white hover:text-gray-400 transition-colors">
             Dashboard
-          </Link>
-          <Link to="/my-tasks" className="text-white hover:text-gray-400 transition-colors">
-            My Tasks
           </Link>
           <Link to="/assign-task" className="text-white hover:text-gray-400 transition-colors">
             Assign Task
