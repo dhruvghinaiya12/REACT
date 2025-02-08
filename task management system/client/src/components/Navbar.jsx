@@ -1,7 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { UserToken } from "../UserToken";
+import Cookies from "js-cookie"
 
 const Navbar = () => {
+const nav=useNavigate()
+let user=UserToken()
+
+  const logout=()=>{
+    Cookies.remove("token")
+    nav("/login")
+  }
+
   return (
     <nav className="bg-gray-900 p-4">
       <div className="container mx-auto flex justify-between items-center">
@@ -21,12 +31,16 @@ const Navbar = () => {
         </div>
 
         <div className="hidden md:flex space-x-6">
-          <Link to="/signup" className="text-white hover:text-gray-400 transition-colors">
+          {user?( <span className="text-white hover:text-gray-400 transition-colors">{user.name}</span>):
+           (<Link to="/signup" className="text-white hover:text-gray-400 transition-colors">
             Sign Up
-          </Link>
-          <Link to="/login" className="text-white hover:text-gray-400 transition-colors">
+          </Link>)}
+         
+         {user?(<span className="text-white hover:text-gray-400 transition-colors" onClick={logout}>Logout</span>):
+         ( <Link to="/login" className="text-white hover:text-gray-400 transition-colors">
             Login
-          </Link>
+          </Link>)}
+         
         </div>
 
         <div className="md:hidden flex items-center">
@@ -60,12 +74,14 @@ const Navbar = () => {
         <Link to="/assign-task" className="block py-2 hover:text-gray-400 transition-colors">
           Assign Task
         </Link>
-        <Link to="/signup" className="block py-2 hover:text-gray-400 transition-colors">
-          Sign Up
-        </Link>
-        <Link to="/login" className="block py-2 hover:text-gray-400 transition-colors">
-          Login
-        </Link>
+        {user?( <span className="text-white hover:text-gray-400 transition-colors">{user.name}</span>):
+           (<Link to="/signup" className="text-white hover:text-gray-400 transition-colors">
+            Sign Up
+          </Link>)}
+          {user?(<span className="text-white hover:text-gray-400 transition-colors">Logout</span>):
+         ( <Link to="/login" className="text-white hover:text-gray-400 transition-colors">
+            Login
+          </Link>)}
       </div>
     </nav>
   );

@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import ApiLink from "../config/API";
+import Cookies from "js-cookie"
+import {useNavigate} from "react-router-dom"
 
 const Login = () => {
+
+const nav=useNavigate()
+
   const [userdata, setUserData] = useState({
     email: "",
     password: "",
@@ -16,7 +21,9 @@ const Login = () => {
     try {
       const res = await ApiLink.post("/user/login", userdata);
       console.log(res.data);
+      Cookies.set("token",res.data.token,{expires:2});
       alert("Login successful");
+      nav('/')
     } catch (error) {
       console.error("Error logging in user", error);
     }

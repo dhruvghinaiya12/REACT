@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ApiLink from "../config/API";
+import Cookies from "js-cookie"
 
 const Signup = () => {
   const [userdata, setUserData] = useState({
@@ -17,7 +18,9 @@ const Signup = () => {
   const signup = async () => {
     try {
       const res = await ApiLink.post("/user/signup", userdata);
-      console.log(res.data);
+      const {user,token}=res.data;
+      console.log(user,token);
+      Cookies.set("token",token,{expires:2})
       alert("Signup successful");
     } catch (error) {
       console.error("Error creating user:", error);
