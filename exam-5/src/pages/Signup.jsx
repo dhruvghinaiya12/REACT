@@ -1,6 +1,11 @@
 import React, { useState } from "react";
-
+import Cookies from "js-cookie"
+import {useNavigate} from "react-router-dom"
 const Signup = () => {
+
+ const nav=useNavigate()
+const storedUsers = JSON.parse(localStorage.getItem("userdata")) || [];
+
   const [userdata, setUserData] = useState({
     name: "",
     email: "",
@@ -12,20 +17,26 @@ const Signup = () => {
     setUserData({ ...userdata, [name]: value });
   };
 
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    storedUsers.push(userdata);
+    localStorage.setItem("userdata", JSON.stringify(storedUsers));
+    Cookies.set("username", userdata.name);
+    setUserData(userdata.name); 
+    alert("User signup successfully!");
+    setUserData({ name: "", email: "", password: "" });
+    nav("/login")
   };
 
   return (
-    <div className="flex items-center justify-center ">
+    <div className="flex items-center justify-center">
       <form
-        className="w-full max-w-md bg-white p-6 rounded-lg shadow-md  mt-20"
+        className="w-full max-w-md bg-white p-6 rounded-lg shadow-md mt-20"
         onSubmit={handleSubmit}
       >
-        <h2 className="text-2xl font-semibold text-center mb-4 text-gray-800">Sign Up</h2>
+        <h2 className="text-2xl font-semibold text-center mb-4 text-gray-800">
+          Sign Up
+        </h2>
 
         <div className="mb-4">
           <label className="block text-gray-700 font-medium mb-1">Name</label>

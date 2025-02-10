@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-
-
+import {useNavigate} from "react-router-dom"
 const Login = () => {
 
-
+  const nav=useNavigate()
 
   const [userdata, setUserData] = useState({
     email: "",
@@ -15,10 +14,21 @@ const Login = () => {
     setUserData({ ...userdata, [name]: value });
   };
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
- 
+
+    const storedUsers = JSON.parse(localStorage.getItem("userdata")) || [];
+
+    const user = storedUsers.find( (user) => user.email == userdata.email && user.password == userdata.password );
+
+    if (user) {
+      alert("Login Successful!");
+     nav("/")
+      setUserData({ email: "", password: "" });
+    } else {
+      alert("Invalid email or password.");
+    }
+
   };
 
   return (
