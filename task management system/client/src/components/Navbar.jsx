@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserToken } from "../UserToken";
 import Cookies from "js-cookie"
+import { Role } from "../role/CheckRole";
 
 const Navbar = () => {
 const nav=useNavigate()
@@ -28,9 +29,9 @@ const logout = () => {
           <Link to="/" className="text-white hover:text-gray-400 transition-colors">
             Dashboard
           </Link>
-          <Link to="/assign-task" className="text-white hover:text-gray-400 transition-colors">
+        {Role(["admin"])?(  <Link to="/assign-task" className="text-white hover:text-gray-400 transition-colors">
             Assign Task
-          </Link>
+          </Link>):null}
         </div>
 
         <div className="hidden md:flex space-x-6">

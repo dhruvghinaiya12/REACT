@@ -21,6 +21,7 @@ const nav=useNavigate()
     try {
       const res = await ApiLink.post("/user/login", userdata);
       console.log(res.data);
+      Cookies.set("token", res.data.token, { expires: 2 }); 
       Cookies.set("isLogged", "true", { expires: 2 });
       alert("Login successful");
       nav('/')
