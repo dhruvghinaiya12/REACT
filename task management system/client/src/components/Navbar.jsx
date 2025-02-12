@@ -7,10 +7,13 @@ const Navbar = () => {
 const nav=useNavigate()
 let user=UserToken()
 
-  const logout=()=>{
-    Cookies.remove("token")
-    nav("/login")
-  }
+const isLogged = Cookies.get("isLogged"); 
+
+const logout = () => {
+  Cookies.remove("isLogged");
+  Cookies.remove("token"); 
+  nav("/login");
+};
 
   return (
     <nav className="bg-gray-900 p-4">
@@ -36,7 +39,7 @@ let user=UserToken()
             Sign Up
           </Link>)}
          
-         {user?(<span className="text-white hover:text-gray-400 transition-colors" onClick={logout}>Logout</span>):
+         {isLogged?(<span className="text-white hover:text-gray-400 transition-colors" onClick={logout}>Logout</span>):
          ( <Link to="/login" className="text-white hover:text-gray-400 transition-colors">
             Login
           </Link>)}

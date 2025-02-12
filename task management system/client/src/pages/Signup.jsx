@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import ApiLink from "../config/API";
 import Cookies from "js-cookie"
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const nav=useNavigate()
   const [userdata, setUserData] = useState({
     name: "",
     email: "",
@@ -22,6 +24,7 @@ const Signup = () => {
       console.log(user,token);
       Cookies.set("token",token,{expires:2})
       alert("Signup successful");
+      nav('/login')
     } catch (error) {
       console.error("Error creating user:", error);
     }
