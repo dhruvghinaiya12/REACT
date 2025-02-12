@@ -7,6 +7,7 @@ import Login from '../pages/Login';
 import TaskDetails from '../pages/TaskDetails';
 import Private from './Private';
 import { Role } from '../role/CheckRole';
+import PageNotFound from '../pages/PageNotFound';
 
 const AllRoutes = () => {
   return (
@@ -17,6 +18,7 @@ const AllRoutes = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/task-details" element={<TaskDetails />} />
+        <Route path="*" element={<PageNotFound/>} />
       </Routes>
     
   )
