@@ -4,7 +4,9 @@ const TaskRoutes=Router();
 
 TaskRoutes.post("/",taskcontroller.CreateTasks)
 
-TaskRoutes.get("/",taskcontroller.GetAllTasks)
+TaskRoutes.get("/:userId",taskcontroller.GetAllTasksByUserId)
+
+TaskRoutes.get("/",taskcontroller.getAllTasks)
 
 
 module.exports=TaskRoutes;

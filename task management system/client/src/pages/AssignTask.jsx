@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import ApiLink from '../config/API';
+import React, { useEffect, useState } from "react";
+import ApiLink from "../config/API";
 
 const AssignTask = () => {
   const [task, setTask] = useState({
-    title: '',
-    description: '',
-    assignedTo: '',
-    status: '',
-    endDate: ''
+    title: "",
+    description: "",
+    assignedTo: "",
+    status: "",
+    endDate: "",
   });
   const [users, setUsers] = useState([]);
 
@@ -21,15 +21,16 @@ const AssignTask = () => {
     }
   };
 
-  const PostTask=async()=>{
+  const PostTask = async () => {
     try {
-      let res=await ApiLink.post("/task",task)
-      console.log(res.data)
-
+      let res = await ApiLink.post("/task", task);
+      console.log(res.data);
+      alert("Task created");
     } catch (error) {
-      console.log(error);   
+      console.log(error);
+      alert("Task creation failed");
     }
-  }
+  };
 
   useEffect(() => {
     getUsers();
@@ -44,13 +45,19 @@ const AssignTask = () => {
     e.preventDefault();
     console.log(task);
     PostTask();
-    setTask({ title: '', description: '', assignedTo: '', status: '', endDate: '' });
+    setTask({
+      title: "",
+      description: "",
+      assignedTo: "",
+      status: "",
+      endDate: "",
+    });
   };
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-gray-800 text-white rounded-lg shadow-lg mt-10">
-      <h2 className="text-2xl font-bold mb-4 text-center">Assign Task</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="bg-blue-50 text-gray-900 h-[calc(100vh-60px)]">
+      <h2 className="text-gray-800 text-2xl font-semibold pt-5 text-center">Assign Task</h2>
+      <form onSubmit={handleSubmit} className="bg-white space-y-4 rounded-lg shadow-lg mt-8 max-w-lg mx-auto p-6 border-gray-200" >
         <div>
           <label className="block text-sm font-medium">Title</label>
           <input
@@ -58,7 +65,7 @@ const AssignTask = () => {
             name="title"
             value={task.title}
             onChange={handleInputChange}
-            className="w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:border-blue-400"
+            className="w-full mt-1 p-2 rounded bg-white border border-gray-300 focus:outline-none focus:border-blue-400"
           />
         </div>
         <div>
@@ -67,7 +74,7 @@ const AssignTask = () => {
             name="description"
             value={task.description}
             onChange={handleInputChange}
-            className="w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:border-blue-400"
+            className="w-full mt-1 p-2 rounded bg-white border border-gray-300 focus:outline-none focus:border-blue-400"
           ></textarea>
         </div>
         <div>
@@ -76,11 +83,15 @@ const AssignTask = () => {
             name="assignedTo"
             value={task.assignedTo}
             onChange={handleInputChange}
-            className="w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:border-blue-400"
+            className="w-full mt-1 p-2 rounded bg-white border border-gray-300 focus:outline-none focus:border-blue-400"
           >
-            <option value="" disabled >Select User</option>
+            <option value="" disabled>
+              Select User
+            </option>
             {users.map((user) => (
-              <option key={user._id} value={user._id}>{user.name}</option>
+              <option key={user._id} value={user._id}>
+                {user.name}
+              </option>
             ))}
           </select>
         </div>
@@ -90,9 +101,11 @@ const AssignTask = () => {
             name="status"
             value={task.status}
             onChange={handleInputChange}
-            className="w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:border-blue-400"
+            className="w-full mt-1 p-2 rounded bg-white border border-gray-300 focus:outline-none focus:border-blue-400"
           >
-            <option value="" disabled >Select Status</option>
+            <option value="" disabled>
+              Select Status
+            </option>
             <option value="pending">Pending</option>
             <option value="in-progress">In Progress</option>
             <option value="completed">Completed</option>
@@ -106,12 +119,12 @@ const AssignTask = () => {
             name="endDate"
             value={task.endDate}
             onChange={handleInputChange}
-            className="w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:border-blue-400"
+            className="w-full mt-1 p-2 rounded bg-white border border-gray-300 focus:outline-none focus:border-blue-400"
           />
         </div>
         <button
           type="submit"
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           Assign Task
         </button>
