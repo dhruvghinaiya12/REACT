@@ -12,6 +12,7 @@ const Dashboard = () => {
       let res = user.role === "admin"
         ? await ApiLink.get(`/task?assignedBy=${user.id}`)
         : await ApiLink.get(`/task?assignedTo=${user.id}`);
+      console.log(res.data);
       
       SetTask(res.data);
     }
