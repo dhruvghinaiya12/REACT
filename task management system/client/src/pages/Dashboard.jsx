@@ -6,6 +6,7 @@ import TaskCard from "../components/TaskCard";
 const Dashboard = () => {
   const [task, SetTask] = useState([]);
   let user = UserToken();
+console.log(user);
 
   const GetTask = async () => {
     if (user) {

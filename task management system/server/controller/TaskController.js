@@ -13,6 +13,7 @@ let {userId}=req.params
 }
 
 exports.getAllTasks=async(req,res)=>{
-    let tasks=await Task.find().populate("assignedBy","name").populate("assignedTo","name")
+    let query=req.query || {};
+    let tasks=await Task.find(query).populate("assignedBy","name").populate("assignedTo","name")
     return res.send(tasks)
 }
