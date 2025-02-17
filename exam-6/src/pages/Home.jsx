@@ -22,10 +22,10 @@ const Home = () => {
     <div className="p-6 bg-gray-900 text-white min-h-screen">
       <h1 className="text-3xl font-bold text-center mb-6">🌍 All Countries</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {data.map((country, index) => (
+        {data.map((country) => (
           <Link
-            key={index}
-            to={`/details/${country.name.common.toLowerCase()}`}  
+            key={country.id}
+            to={`/details/${country.name.common}`}  
             className="bg-gray-800 p-4 rounded-lg shadow-md"
           >
             <img

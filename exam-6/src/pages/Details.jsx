@@ -49,7 +49,7 @@ const Details = () => {
           <p className="text-gray-400">{Object.values(country.currencies)[0].name}</p>
 
           <h2 className="text-xl font-semibold mt-4">Timezones:</h2>
-          <p className="text-gray-400">{country.timezones.join(", ")}</p>
+          <p className="text-gray-400">{country.timezones}</p>
 
           <h2 className="text-xl font-semibold mt-4">Borders:</h2>
           <p className="text-gray-400">
