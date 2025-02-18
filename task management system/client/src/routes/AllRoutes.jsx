@@ -17,7 +17,7 @@ const AllRoutes = () => {
         {Role(["admin"])?(<Route path="/assign-task" element={<Private><AssignTask/></Private>} />):null}
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/task-details" element={<TaskDetails />} />
+        <Route path="/task-details/:id" element={<TaskDetails />} />
         <Route path="*" element={<PageNotFound/>} />
       </Routes>
     
