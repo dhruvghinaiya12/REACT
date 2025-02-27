@@ -27,6 +27,7 @@ const nav=useNavigate()
       nav('/')
     } catch (error) {
       console.error("Error logging in user", error);
+      alert("Error logging in user", error);
     }
   };
 
