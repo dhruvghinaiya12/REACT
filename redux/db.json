@@ -1,0 +1,14 @@
+{
+  "posts": [
+    {
+      "id": "dced",
+      "title": "test",
+      "body": "testing"
+    },
+    {
+      "id": "4cef",
+      "title": "test2",
+      "body": "testing"
+    }
+  ]
+}
