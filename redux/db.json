@@ -1,14 +1,10 @@
 {
   "posts": [
     {
-      "id": "dced",
+      "id": "04cd",
       "title": "test",
-      "body": "testing"
-    },
-    {
-      "id": "4cef",
-      "title": "test2",
-      "body": "testing"
+      "body": "testing",
+      "postedAt": "2025-03-04T20:01"
     }
   ]
 }
