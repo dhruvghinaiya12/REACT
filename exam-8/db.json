@@ -1,0 +1,24 @@
+{
+  "Blogs": [
+    {
+      "id": 1,
+      "title": "Understanding Redux Toolkit",
+      "body": "Redux Toolkit simplifies state management in React applications with less boilerplate."
+    },
+    {
+      "id": 2,
+      "title": "Getting Started with Tailwind CSS",
+      "body": "Tailwind CSS provides utility-first styling, making it easy to build modern UIs."
+    },
+    {
+      "id": 3,
+      "title": "React Router Explained",
+      "body": "React Router allows dynamic routing in React applications, making navigation seamless."
+    },
+    {
+      "id": "2946",
+      "title": "The Future of Technology",
+      "body": "Technology is evolving at an unprecedented pace. AI, blockchain, and quantum computing are shaping the future."
+    }
+  ]
+}
