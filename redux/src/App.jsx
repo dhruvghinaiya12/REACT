@@ -1,10 +1,12 @@
 import React from "react";
-import Post from "./pages/Post";
+import Navbar from "./components/Navbar";
+import AllRoutes from "./routes/AllRoutes";
 
 const App = () => {
   return (
     <div>
-      <Post />
+      <Navbar/>
+      <AllRoutes/>
     </div>
   );
 };

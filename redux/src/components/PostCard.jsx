@@ -12,11 +12,16 @@ const PostCard = ({ id, title, body, postedAt, OnDelete }) => {
   };
 
   return (
-    <div>
-      <h1>title: {title}</h1>
-      <p> body: {body}</p>
-      <p>Posted at: {formatDate1(postedAt)}</p>
-      <button onClick={() => OnDelete(id)}>Delete</button>
+    <div className="bg-white shadow-md rounded-lg p-4 border border-gray-200">
+      <h2 className="text-xl font-bold mb-2">{title}</h2>
+      <p className="text-gray-700 mb-2">{body}</p>
+      <p className="text-sm text-gray-500">Posted at: {formatDate1(postedAt)}</p>
+      <button
+        onClick={() => OnDelete(id)}
+        className="mt-3 bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition"
+      >
+        Delete
+      </button>
     </div>
   );
 };
