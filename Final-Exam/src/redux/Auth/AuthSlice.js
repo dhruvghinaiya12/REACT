@@ -1,8 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { login, logout } from "./AuthApi";
+import Cookies from "js-cookie";
+
+const savedUser = Cookies.get("user") ? JSON.parse(Cookies.get("user")) : null;
 
 const initialState = {
-  user: null,
+  user: savedUser,
   loading: false,
   error: null,
 };

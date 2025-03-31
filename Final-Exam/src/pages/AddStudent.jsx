@@ -107,15 +107,20 @@ const AddStudent = () => {
 
           <div>
             <label className="block text-gray-700 font-medium mb-1">Course</label>
-            <input
-              type="text"
+            <select
               name="course"
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              placeholder="Enter course name"
               value={student.course}
               onChange={handleChange}
               required
-            />
+            >
+              <option value="">Select Course</option>
+              <option value="Fullstack">Fullstack</option>
+              <option value="Frontend">Frontend</option>
+              <option value="Backend">Backend</option>
+              <option value="Data Science">Data Science</option>
+              <option value="UI/UX Design">UI/UX Design</option>
+            </select>
           </div>
 
           <div>

@@ -7,6 +7,38 @@
     }
   ],
   "students": [
- 
+    {
+      "id": "5f0b",
+      "name": "dhruv",
+      "email": "dhruvghinaiya90@gamil.com",
+      "age": "19",
+      "course": "fullstack",
+      "phone": "1010101010",
+      "address": "A/202 sanskrut Appartment",
+      "gender": "Male",
+      "enrollmentDate": "2025-04-18"
+    },
+    {
+      "id": "374e",
+      "name": "dhruv",
+      "email": "dhruvghinaiya12@gamil.com",
+      "age": "20",
+      "course": "backend",
+      "phone": "1010101010",
+      "address": "A/202 sanskrut Appartment",
+      "gender": "Male",
+      "enrollmentDate": "2025-04-08"
+    },
+    {
+      "id": "c00c",
+      "name": "bob",
+      "email": "dhruvghinaiyago@gamil.com",
+      "age": "20",
+      "course": "UI/UX Design",
+      "phone": "1010101010",
+      "address": "A/202 sanskrut Appartment",
+      "gender": "Male",
+      "enrollmentDate": "2025-04-17"
+    }
   ]
 }

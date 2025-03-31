@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import ApiLink from "../../services/apiClient";
+import Cookies from "js-cookie";
 
 export const login = createAsyncThunk(
   "auth/login",
@@ -7,12 +8,6 @@ export const login = createAsyncThunk(
     try {
       const res = await ApiLink.get("/users");
       const users = res.data;
-
-      if (users.length === 0) {
-        const newUser = { email: userData.email, password: userData.password };
-        const addedUser = await ApiLink.post("/users", newUser);
-        return addedUser.data; 
-      }
 
       let user = users.find(
         (u) => u.email === userData.email && u.password === userData.password
@@ -22,6 +17,8 @@ export const login = createAsyncThunk(
         return rejectWithValue("Invalid email or password");
       }
 
+      Cookies.set("user", JSON.stringify(user), { expires: 1 }); 
+
       return user;
     } catch (error) {
       return rejectWithValue("Login failed");
@@ -29,7 +26,7 @@ export const login = createAsyncThunk(
   }
 );
 
-
 export const logout = createAsyncThunk("auth/logout", async () => {
-    return null; 
-  });
+  Cookies.remove("user");
+  return null; 
+});

@@ -49,6 +49,7 @@ export const updateStudent = createAsyncThunk(
   }
 );
 
+
 export const deleteStudent = createAsyncThunk(
   "students/deleteStudent",
   async (id, { rejectWithValue }) => {
