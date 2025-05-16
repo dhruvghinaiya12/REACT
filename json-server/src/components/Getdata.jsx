@@ -27,6 +27,8 @@ const Getdata = () => {
                 transition: Slide,
               });
 
+              
+
         } catch (error) {
             console.log(error);
             
