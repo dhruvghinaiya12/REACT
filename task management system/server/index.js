@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
     res.status(200).json({ message: "Server is live and reachable!" });
   });
 
-app.use("/api/v1",decodeToken,AppRoute)
+app.use("/",decodeToken,AppRoute)
 
 app.listen(port,()=>{
     console.log(`Server is running on port ${port}`)
