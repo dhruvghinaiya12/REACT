@@ -8,6 +8,8 @@ import TaskDetails from '../pages/TaskDetails';
 import Private from './Private';
 import { Role } from '../role/CheckRole';
 import PageNotFound from '../pages/PageNotFound';
+import UpdateTask from '../pages/UpdateTask';
+import CompletedTasks from '../pages/CompletedTasks';
 
 const AllRoutes = () => {
   return (
@@ -18,6 +20,8 @@ const AllRoutes = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/task-details/:id" element={<TaskDetails />} />
+        <Route path="/task/update/:id" element={<Private><UpdateTask /></Private>} />
+        <Route path="/completed-tasks" element={<Private><CompletedTasks /></Private>} />
         <Route path="*" element={<PageNotFound/>} />
       </Routes>
     

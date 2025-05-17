@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import ApiLink from "../config/API";
-import Cookies from "js-cookie"
-import {useNavigate} from "react-router-dom"
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
-
-const nav=useNavigate()
+  const nav = useNavigate();
 
   const [userdata, setUserData] = useState({
     email: "",
@@ -21,13 +22,27 @@ const nav=useNavigate()
     try {
       const res = await ApiLink.post("/user/login", userdata);
       console.log(res.data);
-      Cookies.set("token", res.data.token, { expires: 2 }); 
+      Cookies.set("token", res.data.token, { expires: 2 });
       Cookies.set("isLogged", "true", { expires: 2 });
-      alert("Login successful");
-      nav('/')
+      toast.success("Login successful", {
+        position: "top-center",
+        autoClose: 3000,
+        onClose: () => nav("/"),
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     } catch (error) {
       console.error("Error logging in user", error);
-      alert("Error logging in user", error);
+      toast.error(error.response?.data?.message || "Error logging in user", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     }
   };
 
@@ -39,6 +54,7 @@ const nav=useNavigate()
 
   return (
     <div className="flex items-center justify-center">
+      <ToastContainer />
       <form
         className="max-w-md w-full bg-white p-8 rounded-lg shadow-md mt-30"
         onSubmit={handleSubmit}

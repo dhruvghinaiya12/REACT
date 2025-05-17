@@ -10,5 +10,9 @@ TaskRoutes.get("/",taskcontroller.getAllTasks)
 
 TaskRoutes.get("/tasks/:taskId",taskcontroller.GetTaskById)
 
+TaskRoutes.put("/tasks/:taskId", taskcontroller.UpdateTask);
+
+TaskRoutes.delete("/tasks/:taskId", taskcontroller.DeleteTask);
+
 
 module.exports=TaskRoutes;

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import ApiLink from "../config/API";
-import Cookies from "js-cookie"
+import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Signup = () => {
-  const nav=useNavigate()
+  const nav = useNavigate();
   const [userdata, setUserData] = useState({
     name: "",
     email: "",
@@ -20,15 +22,30 @@ const Signup = () => {
   const signup = async () => {
     try {
       const res = await ApiLink.post("/user/signup", userdata);
-      const {user,token}=res.data;
-      console.log(user,token);
-      Cookies.set("token",token,{expires:2})
-      alert("Signup successful");
-      nav('/login')
+      const { user, token } = res.data;
+      console.log(user, token);
+      Cookies.set("token", token, { expires: 2 });
+      toast.success("Signup successful", {
+        position: "top-center",
+        autoClose: 3000,  
+        onClose: () => nav("/login"), 
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     } catch (error) {
-      console.error("Error creating user:", error);
+      toast.error(error.message || "Error creating user", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     }
   };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,6 +55,7 @@ const Signup = () => {
 
   return (
     <div className="flex items-center justify-center ">
+      <ToastContainer />
       <form
         className="w-full max-w-md bg-white p-6 rounded-lg shadow-md  mt-20"
         onSubmit={handleSubmit}

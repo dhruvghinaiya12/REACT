@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import ApiLink from "../config/API";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AssignTask = () => {
+  const nav = useNavigate();
+
   const [task, setTask] = useState({
     title: "",
     description: "",
@@ -9,6 +14,7 @@ const AssignTask = () => {
     status: "",
     endDate: "",
   });
+
   const [users, setUsers] = useState([]);
 
   const getUsers = async () => {
@@ -18,6 +24,14 @@ const AssignTask = () => {
       console.log(res.data);
     } catch (error) {
       console.log(error);
+      toast.error("Failed to fetch users", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     }
   };
 
@@ -25,10 +39,27 @@ const AssignTask = () => {
     try {
       let res = await ApiLink.post("/task", task);
       console.log(res.data);
-      alert("Task created");
+
+      toast.success("Task created successfully", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        onClose: () => nav("/"),
+      });
+
     } catch (error) {
       console.log(error);
-      alert("Task creation failed");
+      toast.error("Task creation failed", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     }
   };
 
@@ -56,8 +87,12 @@ const AssignTask = () => {
 
   return (
     <div className="bg-blue-50 text-gray-900 h-[calc(100vh-60px)]">
+      <ToastContainer />
       <h2 className="text-gray-800 text-2xl font-semibold pt-5 text-center">Assign Task</h2>
-      <form onSubmit={handleSubmit} className="bg-white space-y-4 rounded-lg shadow-lg mt-8 max-w-lg mx-auto p-6 border-gray-200" >
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white space-y-4 rounded-lg shadow-lg mt-8 max-w-lg mx-auto p-6 border-gray-200"
+      >
         <div>
           <label className="block text-sm font-medium">Title</label>
           <input
