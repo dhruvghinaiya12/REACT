@@ -4,10 +4,9 @@ import ApiLink from "../config/API";
 
 const TaskDetails = () => {
   const [text, setText] = useState("");
-  const [task, setTask] = useState([]);
+  const [task, setTask] = useState(null); 
+  const [comments, setComments] = useState([]);
   const { id } = useParams();
-  
-  console.log(id);
 
   const GetTaskDetails = async () => {
     try {
@@ -19,8 +18,18 @@ const TaskDetails = () => {
     }
   };
 
+  const GetTaskComments = async () => {
+    try {
+      let res = await ApiLink.get(`/status/task/comments/${id}`);
+      console.log("Comments Response:", res.data);
+      setComments(res.data);
+    } catch (error) {
+      console.log("Error Getting Comments", error);
+    }
+  };
+
   const AddComment = async () => {
-    if (!text.trim()) return; 
+    if (!text.trim()) return;
 
     let comment = {
       text,
@@ -30,7 +39,8 @@ const TaskDetails = () => {
     try {
       let res = await ApiLink.post("/status", comment);
       console.log(res.data);
-      setText(""); 
+      setText("");
+      GetTaskComments();
     } catch (error) {
       console.log("Error Adding Comment", error);
     }
@@ -38,6 +48,7 @@ const TaskDetails = () => {
 
   useEffect(() => {
     GetTaskDetails();
+    GetTaskComments();
   }, []);
 
   return (
@@ -66,6 +77,23 @@ const TaskDetails = () => {
         >
           Add Comment
         </button>
+      </div>
+
+      <div className="mt-6">
+        <h3 className="text-lg font-semibold mb-2">Comments:</h3>
+        {comments.length > 0 ? (
+          comments.map((comment, index) => (
+            <div
+              key={index}
+              className="bg-white p-3 mb-2 rounded-lg shadow-sm"
+            >
+              <p className="font-bold">{comment.user?.name || "Anonymous"}</p>
+              <p>{comment.text}</p>
+            </div>
+          ))
+        ) : (
+          <p>No comments yet.</p>
+        )}
       </div>
     </div>
   );
