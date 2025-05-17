@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from "react";
 import ApiLink from "../config/API";
 import TaskCard from "../components/TaskCard";
+import { UserToken } from "../UserToken"; 
 
 const CompletedTasks = () => {
   const [tasks, setTasks] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const user = UserToken();
 
   const fetchCompletedTasks = async () => {
     try {
-      const res = await ApiLink.get("/task?status=completed");
+      let endpoint = "/task?status=completed";
+
+      if (user.role !== "admin") {
+        endpoint += `&assignedTo=${user.id}`;
+      }
+
+      const res = await ApiLink.get(endpoint);
 
       if (JSON.stringify(tasks) !== JSON.stringify(res.data)) {
         setTasks(res.data);
@@ -36,6 +44,7 @@ const CompletedTasks = () => {
             <TaskCard
               {...task}
               key={task._id}
+              role={user.role}
               refreshTasks={fetchCompletedTasks}
             />
           ))
