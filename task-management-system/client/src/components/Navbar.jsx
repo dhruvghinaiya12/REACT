@@ -38,7 +38,7 @@ const Navbar = () => {
 
         <div className="hidden md:flex space-x-6">
           {user ? (
-            <span className="text-white hover:text-gray-400 transition-colors">{user.name}</span>
+            <span className="text-white hover:text-gray-400 transition-colors cursor-pointer">{user.name}</span>
           ) : (
             <Link to="/signup" className="text-white hover:text-gray-400 transition-colors">
               Sign Up
